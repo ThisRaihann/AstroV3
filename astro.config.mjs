@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   // 1. Pastikan domain ini sesuai dengan repo/hosting kamu
-  site: 'https://ngarumi.dev',
+  site: 'astro-v3-beta.vercel.app',
   
   // 2. Tambahkan trailingSlash untuk konsistensi SEO (Penting!)
   trailingSlash: 'always',
