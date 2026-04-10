@@ -3,22 +3,14 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  // 1. Pastikan domain ini sesuai dengan repo/hosting kamu
-  site: 'astro-v3-beta.vercel.app',
-  
-  // 2. Tambahkan trailingSlash untuk konsistensi SEO (Penting!)
+  // PASTIKAN site ada dan protokolnya lengkap (https://)
+  site: 'https://ngarumi.dev',
+  // Tambahkan trailingSlash agar sitemap nggak bingung ngitung path
   trailingSlash: 'always',
-
   integrations: [
     tailwind(), 
-    sitemap({
-      // Opsional: Bikin sitemap lebih informatif buat Google
-      changefreq: 'weekly',
-      priority: 0.7,
-      lastmod: new Date(),
-    })
+    sitemap() // Coba pakai yang default dulu tanpa konfigurasi objek {}
   ],
-
   markdown: {
     shikiConfig: {
       theme: 'github-dark',
