@@ -3,15 +3,16 @@ import { getCollection } from 'astro:content';
 import BlogLayout from '../../layouts/BlogLayout.astro';
 
 // 1. Ambil path dari collection 'blog'
+import type { CollectionEntry } from 'astro:content';
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map(post => ({
+  return posts.map((post: CollectionEntry<'blog'>) => ({
     params: { slug: post.slug },
     props: { post },
   }));
 }
 
-const { post } = Astro.props;
+const { post } = Astro.props as { post: CollectionEntry<'blog'> };
 const { Content } = await post.render();
 
 // Logic Reading Time manual jika tidak ada di frontmatter

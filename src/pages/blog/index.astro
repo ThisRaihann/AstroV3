@@ -3,11 +3,12 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 // Mengambil data dari Content Collections
-const allPosts = await getCollection('blog');
+import type { CollectionEntry } from 'astro:content';
+const allPosts: CollectionEntry<'blog'>[] = await getCollection('blog');
 
 // Mapping & Sorting data
 const sortedPosts = allPosts
-  .map(post => ({
+  .map((post: CollectionEntry<'blog'>) => ({
     slug: post.slug,
     title: post.data.title ?? 'Tanpa Judul',
     description: post.data.description ?? '',
@@ -23,7 +24,7 @@ const gridPosts = sortedPosts.slice(1, 4);
 const otherPosts = sortedPosts.slice(4);
 
 // Ambil semua tag unik
-const allTags = [...new Set(sortedPosts.flatMap(p => p.tags))].sort();
+const allTags = [...new Set(sortedPosts.flatMap((p: { tags: string[] }) => p.tags))].sort();
 ---
 
 <BaseLayout
@@ -59,7 +60,7 @@ const allTags = [...new Set(sortedPosts.flatMap(p => p.tags))].sort();
                 </div>
                 <div class="p-8 md:p-12 flex flex-col flex-1">
                   <div class="flex gap-2 mb-4">
-                    {featuredPost.tags.map(tag => <span class="font-mono text-[0.6rem] text-gold uppercase tracking-tighter border border-gold/20 px-2 py-0.5 rounded-sm">{tag}</span>)}
+                    {featuredPost.tags.map((tag: string) => <span class="font-mono text-[0.6rem] text-gold uppercase tracking-tighter border border-gold/20 px-2 py-0.5 rounded-sm">{tag}</span>)}
                   </div>
                   <h2 class="font-display font-light text-3xl md:text-4xl text-ink mb-4 group-hover:text-gold transition-colors">{featuredPost.title}</h2>
                   <p class="text-ink-2 font-light leading-relaxed mb-8 line-clamp-3 text-lg">{featuredPost.description}</p>
@@ -73,7 +74,7 @@ const allTags = [...new Set(sortedPosts.flatMap(p => p.tags))].sort();
           )}
 
           <div class="space-y-8">
-            {gridPosts.map(post => (
+            {gridPosts.map((post: typeof sortedPosts[number]) => (
               <a href={`/blog/${post.slug}`} class="group block reveal-section">
                 <div class="relative overflow-hidden rounded-2xl aspect-video mb-4 border border-bg-2">
                    <img src={post.image} alt={post.title} class="w-full h-full object-cover transition-all duration-500" />
@@ -89,7 +90,7 @@ const allTags = [...new Set(sortedPosts.flatMap(p => p.tags))].sort();
           <section class="reveal-section border-t border-bg-2 pt-16">
             <h2 class="font-mono text-[0.7rem] tracking-[0.3em] uppercase text-gold mb-12">Arsip Berita Lain</h2>
             <div class="divide-y divide-bg-2">
-              {otherPosts.map(post => (
+              {otherPosts.map((post: typeof sortedPosts[number]) => (
                 <a href={`/blog/${post.slug}`} class="group grid grid-cols-1 md:grid-cols-[1fr_auto] items-center py-8 hover:px-4 transition-all duration-300">
                   <div class="flex flex-col gap-2">
                     <p class="font-mono text-[0.6rem] text-ink-3 uppercase tracking-widest">
