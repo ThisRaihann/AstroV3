@@ -44,4 +44,4 @@ Memilih Partner Event adalah memilih siapa yang akan mewakili wajah brand Anda d
 Silakan kunjungi [Website R Project](https://rprojectevent.com) untuk info lebih lanjut.
 
 ---
-*Artikel ini dirilis untuk memberikan wawasan tentang standar profesionalisme penyelenggaraan event bersama R Project Radar Kediri.*
+*Artikel ini dirilis untuk memberikan wawasan tentang standar profesionalisme penyelenggaraan event bersama R Project Radar Kediri.* 

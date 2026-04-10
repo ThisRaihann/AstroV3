@@ -43,4 +43,4 @@ Seorang juara tidak lahir di hari perlombaan. Mereka ditempa dalam ribuan jam la
 
 Untuk kamu yang saat ini masih ragu, ingatlah satu hal: **Ketakutan terbesar bukanlah kegagalan dalam lomba, melainkan penyesalan karena tidak pernah mencoba.** Daftarkan dirimu. Uji batas kemampuanmu. Jadilah bagian dari sejarah kebangkitan intelektual tahun ini. Ribuan peserta sudah mengamankan posisi mereka—pastikan namamu ada di daftar teratas.
 
-**Informasi Pendaftaran resmi akan segera hadir. Sampai jumpa di garis start para juara!**
+**Informasi Pendaftaran resmi akan segera hadir. Sampai jumpa di garis start para juara!** 

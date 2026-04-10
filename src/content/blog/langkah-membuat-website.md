@@ -54,4 +54,4 @@ Tugas developer tidak selesai setelah tombol 'Publish' ditekan. Website butuh mo
 
 Membangun website adalah perjalanan panjang antara seni desain dan presisi engineering. Dengan mengikuti langkah yang tepat, website kamu tidak hanya akan terlihat cantik, tapi juga kokoh dan mampu menopang pertumbuhan bisnis jangka panjang.
 
-**Siap memulai proyek website kustom Anda? Mari bangun bersama Ngarumi Soft.**
+**Siap memulai proyek website kustom Anda? Mari bangun bersama Ngarumi Soft.** 

@@ -9,7 +9,7 @@ const allPosts: CollectionEntry<'blog'>[] = await getCollection('blog');
 // Mapping & Sorting data
 const sortedPosts = allPosts
   .map((post: CollectionEntry<'blog'>) => ({
-    slug: post.slug,
+    slug: post.id,
     title: post.data.title ?? 'Tanpa Judul',
     description: post.data.description ?? '',
     pubDate: post.data.pubDate,

@@ -1,32 +1,40 @@
 ---
 import { getCollection } from 'astro:content';
 import BlogLayout from '../../layouts/BlogLayout.astro';
-
-// 1. Ambil path dari collection 'blog'
 import type { CollectionEntry } from 'astro:content';
+
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map((post: CollectionEntry<'blog'>) => ({
-    params: { slug: post.slug },
+  return posts.map((post: CollectionEntry<'blog'>) => ({ // Tambahkan tipe di sini
+    params: { slug: post.id }, 
     props: { post },
   }));
 }
 
-const { post } = Astro.props as { post: CollectionEntry<'blog'> };
-const { Content } = await post.render();
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+const { post } = Astro.props;
 
-// Logic Reading Time manual jika tidak ada di frontmatter
-const wordCount = post.body.split(/\s+/).length;
-const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+// Paksa tipe data ke any sebentar supaya bisa render tanpa merah
+const { Content } = await (post as any).render();
 
-// Gabungkan data agar bisa dikirim ke BlogLayout
-const props = {
-  ...post.data,
-  image: typeof post.data.image === 'object' && post.data.image !== null ? post.data.image.url : post.data.image,
-  readingTime: post.data.readingTime ?? readingTime
+// Logic Reading Time
+const wordCount = post.body ? post.body.split(/\s+/).length : 0;
+const calculatedReadingTime = Math.max(1, Math.ceil(wordCount / 200));
+
+// Normalisasi data untuk BlogLayout
+const blogProps = {
+  title: post.data.title,
+  description: post.data.description,
+  // Pastikan pubDate dikonversi ke string agar aman dikirim ke Layout
+  pubDate: new Date(post.data.pubDate),
+  // Proteksi jika image undefined atau null
+  image: post.data.image?.url ?? '/og-default.jpg',
+  readingTime: post.data.readingTime ?? calculatedReadingTime
 };
 ---
 
-<BlogLayout {...props}>
+<BlogLayout {...blogProps}>
   <Content />
 </BlogLayout>
