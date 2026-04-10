@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const seoData = {
+  title: "Layanan Pengembangan ERP & LMS Profesional — Ngarumi Soft",
+  description: "Solusi software house spesialis sistem ERP kustom, platform LMS, dan UI/UX Engineering.",
+  image: "/images/og-services.jpg"
+};
+
+const services = [
+  {
+    num: '01', icon: '◈', title: 'Management Systems (ERP/POS)',
+    desc: 'Kami membangun ekosistem manajemen stok, warehouse, dan Point of Sales yang terintegrasi. Fokus pada efisiensi alur kerja dan akurasi data real-time untuk bisnis modern.',
+    tags: ['Laravel', 'Livewire', 'MySQL'],
+    deliverables: ['Custom ERP Solution', 'Inventory Dashboard', 'Multi-tenant System', 'Integrasi Cloud'],
+  },
+  {
+    num: '02', icon: '◉', title: 'Educational Tech (LMS)',
+    desc: 'Pengembangan platform Learning Management System kustom untuk institusi. Memungkinkan pengelolaan materi, ujian online, hingga tracking progres siswa secara otomatis.',
+    tags: ['E-Learning', 'Video Stream', 'Automated Grading', 'Scalable DB'],
+    deliverables: ['Platform LMS Kustom', 'Panel Administrasi', 'Database Siswa', 'Report Generator'],
+  },
+  {
+    num: '03', icon: '◎', title: 'Corporate Web Presence',
+    desc: 'Transformasi identitas brand ke dalam platform digital yang memukau. Kami menggabungkan estetika desain dengan performa web (Core Web Vitals) yang optimal.',
+    tags: ['Astro', 'Tailwind CSS', 'GSAP', 'SEO Optimized'],
+    deliverables: ['Company Profile', 'Modern Portfolio', 'Design System', 'High-Performance Web'],
+  },
+  {
+    num: '04', icon: '⬡', title: 'Technical Consultation',
+    desc: 'Audit infrastruktur digital, review kode, dan konsultasi arsitektur. Kami membantu mengidentifikasi bottleneck dan menyusun roadmap teknologi jangka panjang.',
+    tags: ['Performance Audit', 'Security Review', 'Scaling Roadmap', 'Optimization SEO'],
+    deliverables: ['Full Audit Report', 'Security Checkup', 'Scaling Roadmap', 'Optimization SEO'],
+  },
+];
+
+const faqs = [
+  { q: 'Bagaimana alur kerja di Ngarumi Soft?', a: 'Dimulai dari Discovery (analisis kebutuhan), Planning (arsitektur), Development (coding & testing), hingga Deployment. Kami menggunakan sistem cicilan per-milestone untuk transparansi.' },
+  { q: 'Apakah sistem bisa di-kustomisasi di kemudian hari?', a: 'Tentu. Arsitektur sistem yang kami bangun bersifat modular dan skalabel, memudahkan penambahan fitur baru seiring pertumbuhan bisnis Anda.' },
+  { q: 'Berapa biaya investasi untuk sebuah sistem?', a: 'Biaya bersifat kustom tergantung kompleksitas fitur. Kami selalu memberikan breakdown biaya yang transparan berdasarkan fungsionalitas yang Anda butuhkan.' },
+];
+---
+
+<BaseLayout {...seoData}>
+  <main class="mx-auto w-[min(1160px,100%-2rem)] py-24">
+
+    <header class="mb-24 reveal-section">
+      <p class="font-mono text-[0.6rem] tracking-[0.25em] uppercase text-gold mb-6">Services & Solutions</p>
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-10">
+        <h1 class="font-display font-light text-ink leading-[1] tracking-tight" style="font-size:clamp(3rem,7vw,6rem)">
+          Solusi cerdas untuk<br />
+          <span class="text-gradient-gold italic font-serif">akselerasi</span> bisnis.
+        </h1>
+        <p class="text-ink-2 font-light leading-relaxed max-w-sm text-[1rem]">
+          Ngarumi Soft menghadirkan standar engineering tinggi untuk transformasi digital yang berdampak nyata bagi mitra bisnis kami.
+        </p>
+      </div>
+    </header>
+
+    <section class="divide-y divide-bg-2 border-y border-bg-2 mb-36 reveal-section">
+      {services.map(s => (
+        <article class="group grid grid-cols-1 lg:grid-cols-[auto_1fr_auto] gap-8 lg:gap-20 py-14 lg:py-16 hover:bg-bg-1/40 transition-all duration-500 px-2 sm:px-6">
+          <div class="flex lg:flex-col items-center lg:items-start gap-4 lg:gap-3 w-20">
+            <span class="font-mono text-[0.65rem] tracking-widest text-ink-3">{s.num}</span>
+            <span class="text-3xl text-gold/30 group-hover:text-gold group-hover:scale-110 transition-all duration-500">{s.icon}</span>
+          </div>
+
+          <div>
+            <h2 class="font-display font-light text-2xl sm:text-3xl text-ink mb-4 group-hover:text-gold transition-colors duration-500">{s.title}</h2>
+            <p class="text-[1rem] text-ink-2 font-light leading-relaxed mb-8 max-w-xl">{s.desc}</p>
+            <div class="flex flex-wrap gap-2">
+              {s.tags.map(t => (
+                <span class="font-mono text-[0.62rem] tracking-wider text-ink-3 border border-bg-3 px-3 py-1 rounded-sm bg-bg-2/30 hover:border-gold/50 transition-colors">{t}</span>
+              ))}
+            </div>
+          </div>
+
+          <aside class="lg:border-l lg:border-bg-2 lg:pl-12 min-w-[200px] pt-4 lg:pt-0">
+            <p class="font-mono text-[0.6rem] tracking-[0.2em] uppercase text-gold mb-5 opacity-70">Deliverables</p>
+            <ul class="space-y-3">
+              {s.deliverables.map(d => (
+                <li class="flex items-center gap-3 text-sm text-ink-2 font-light">
+                  <span class="w-1.5 h-px bg-gold/50 shrink-0 group-hover:w-3 transition-all"></span>
+                  {d}
+                </li>
+              ))}
+            </ul>
+          </aside>
+        </article>
+      ))}
+    </section>
+
+    <section class="reveal-section mb-32">
+      <div class="flex items-center gap-6 mb-16">
+        <h2 class="font-mono text-[0.65rem] tracking-[0.3em] uppercase text-gold">Common Inquiries (FAQ)</h2>
+        <div class="h-px bg-gradient-to-r from-bg-3 to-transparent flex-1"></div>
+      </div>
+
+      <div class="max-w-4xl mx-auto space-y-4">
+        {faqs.map(f => (
+          <details class="group bg-bg-1/40 border border-bg-2 rounded-2xl overflow-hidden transition-all duration-300 hover:border-gold/20">
+            <summary class="flex items-center justify-between p-7 cursor-pointer list-none focus:outline-none">
+              <h3 class="font-display font-light text-xl text-ink group-open:text-gold transition-colors pr-8">
+                {f.q}
+              </h3>
+              <div class="relative w-5 h-5 shrink-0 transition-transform duration-500 group-open:rotate-180">
+                <span class="absolute top-1/2 left-0 w-full h-0.5 bg-bg-3 group-hover:bg-gold transition-colors"></span>
+                <span class="absolute top-1/2 left-0 w-full h-0.5 bg-bg-3 group-hover:bg-gold transition-colors rotate-90 group-open:opacity-0 transition-all"></span>
+              </div>
+            </summary>
+            <div class="px-7 pb-8">
+              <p class="text-[1rem] text-ink-2 leading-relaxed font-light border-t border-bg-2/50 pt-6 animate-slide-down">
+                {f.a}
+              </p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="reveal-section mt-24">
+      <div class="relative overflow-hidden bg-bg-1 border border-bg-2 p-10 sm:p-20 rounded-[2.5rem] text-center shadow-2xl">
+        <div class="absolute -top-24 -left-24 w-80 h-80 bg-gold/5 blur-[120px] rounded-full"></div>
+        <div class="relative z-10 max-w-2xl mx-auto">
+          <h2 class="font-display font-light text-3xl sm:text-5xl text-ink mb-8">Siap Membangun Sistem yang <span class="text-gradient-gold italic font-serif">Skalabel</span>?</h2>
+          <p class="text-ink-2 font-light text-lg mb-12">Diskusikan tantangan bisnis Anda dengan Ngarumi Soft. Kami akan bantu merancang arsitektur digital yang tepat guna.</p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <a href="/kontak" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-12 py-5 bg-gold text-bg font-sans text-[0.8rem] font-bold tracking-[0.15em] uppercase rounded-sm transition-all duration-300 hover:bg-gold-light">
+              Mulai Projek Sekarang
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>
+
+<style>
+  .reveal-section { opacity:0; transform:translateY(32px); transition:all 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
+  .reveal-section.in-view { opacity:1; transform:translateY(0); }
+
+  .text-gradient-gold {
+    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @keyframes slide-down {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-slide-down { animation: slide-down 0.4s ease-out forwards; }
+
+  summary::-webkit-details-marker { display: none; }
+  details[open] { @apply border-gold/30 bg-bg-1; }
+</style>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal-section').forEach(el => observer.observe(el));
+</script>

@@ -1,0 +1,164 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: string;
+  author?: string;
+  tags?: string[];
+  image?: string;
+  readingTime?: number;
+}
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  author = 'Ngarumi Soft',
+  tags = [],
+  image,
+  readingTime,
+} = Astro.props;
+
+const formatDate = (d: string | Date) => 
+  new Date(d).toLocaleDateString('id-ID', {
+    year: 'numeric', month: 'long', day: 'numeric',
+  });
+
+const formattedPub = formatDate(pubDate);
+const formattedUpd = updatedDate ? formatDate(updatedDate) : null;
+---
+
+<BaseLayout
+  title={`${title} — Ngarumi Soft`}
+  description={description}
+  image={image}
+>
+  <div
+    id="progress-bar"
+    class="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-gold via-gold-light to-gold z-[100] transition-all duration-150 ease-out"
+    style="width: 0%"
+    aria-hidden="true"
+  ></div>
+
+  <article class="mx-auto w-[min(780px,100%-3rem)] py-20 relative">
+
+    <a
+      href="/blog"
+      class="inline-flex items-center gap-2 font-mono text-[0.72rem] tracking-widest text-ink-3 hover:text-gold transition-colors mb-12 group"
+    >
+      <svg class="transition-transform group-hover:-translate-x-1" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Kembali ke Blog
+    </a>
+
+    {tags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-8">
+        {tags.map(tag => (
+          <a
+            href={`/blog/tag/${tag.toLowerCase().replace(/\s+/g,'-')}`}
+            class="font-mono text-[0.6rem] tracking-widest uppercase text-gold border border-gold/30 bg-gold/10 px-3 py-1 rounded-full hover:bg-gold/20 transition-all"
+          >
+            {tag}
+          </a>
+        ))}
+      </div>
+    )}
+
+    <header class="mb-12">
+      <h1 class="font-display font-light text-4xl md:text-5xl text-ink mb-8 leading-[1.15] opacity-0 animate-fade-up">
+        {title}
+      </h1>
+
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[0.7rem] tracking-wide text-ink-3 pb-8 border-b border-bg-2 mb-12">
+        <span class="text-ink">{author}</span>
+        <span aria-hidden="true" class="text-bg-3">/</span>
+        <time datetime={pubDate.toString()}>{formattedPub}</time>
+        {formattedUpd && (
+          <>
+            <span aria-hidden="true" class="text-bg-3">/</span>
+            <span>Update: {formattedUpd}</span>
+          </>
+        )}
+        {readingTime && (
+          <>
+            <span aria-hidden="true" class="text-bg-3">/</span>
+            <span class="text-gold/80">{readingTime} menit baca</span>
+          </>
+        )}
+      </div>
+
+      {image && (
+        <div class="mb-12 rounded-2xl overflow-hidden border border-bg-2 shadow-2xl opacity-0 animate-fade-up" style="animation-delay: 0.2s">
+          <img 
+            src={image} 
+            alt={title} 
+            class="w-full aspect-video object-cover transition-all duration-700"
+            loading="eager"
+          />
+        </div>
+      )}
+    </header>
+
+    <div class="prose prose-invert prose-lg max-w-none
+      prose-headings:font-display prose-headings:font-light prose-headings:text-ink
+      prose-p:text-ink-2 prose-p:leading-[1.85] prose-p:mb-8
+      prose-a:text-gold prose-a:underline prose-a:decoration-gold/30 underline-offset-4 hover:prose-a:text-gold-light transition-all
+      prose-strong:text-ink prose-strong:font-medium
+      prose-code:font-mono prose-code:text-gold prose-code:bg-bg-2 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none
+      prose-pre:bg-bg-1 prose-pre:border prose-pre:border-bg-3 prose-pre:rounded-xl prose-pre:p-6
+      prose-blockquote:border-l-gold prose-blockquote:text-ink-2 prose-blockquote:italic prose-blockquote:bg-bg-1/40 prose-blockquote:py-2 prose-blockquote:pr-4
+      prose-img:rounded-2xl prose-img:shadow-2xl
+    ">
+      <slot />
+    </div>
+
+    <footer class="mt-20 pt-10 border-t border-bg-2 flex flex-col sm:flex-row justify-between items-center gap-6">
+      <div class="flex flex-wrap gap-2">
+        {tags.map(tag => (
+          <span class="font-mono text-[0.6rem] tracking-widest uppercase text-ink-3 border border-bg-3 px-3 py-1 rounded-full">
+            #{tag}
+          </span>
+        ))}
+      </div>
+      <a
+        href="/blog"
+        class="font-mono text-[0.7rem] tracking-widest text-gold hover:text-white transition-colors flex items-center gap-2 group"
+      >
+        <span class="group-hover:-translate-x-1 transition-transform">←</span> Indeks Artikel
+      </a>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style is:global>
+  .prose code::before,
+  .prose code::after {
+    content: "" !important;
+  }
+  
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-up {
+    animation: fade-up 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+</style>
+
+<script>
+  const updateProgress = () => {
+    const bar = document.getElementById('progress-bar');
+    if (bar) {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = (window.scrollY / docHeight) * 100;
+      bar.style.width = `${Math.min(scrolled, 100)}%`;
+    }
+  };
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  document.addEventListener('astro:page-load', updateProgress);
+</script>

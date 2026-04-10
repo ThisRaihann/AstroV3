@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+
+// 1. Ambil path dari collection 'blog'
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+// Logic Reading Time manual jika tidak ada di frontmatter
+const wordCount = post.body.split(/\s+/).length;
+const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+
+// Gabungkan data agar bisa dikirim ke BlogLayout
+const props = {
+  ...post.data,
+  image: typeof post.data.image === 'object' && post.data.image !== null ? post.data.image.url : post.data.image,
+  readingTime: post.data.readingTime ?? readingTime
+};
+---
+
+<BlogLayout {...props}>
+  <Content />
+</BlogLayout>

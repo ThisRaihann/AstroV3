@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const timeline = [
+  { 
+    year: '2026', 
+    role: 'Scaling & Innovation', 
+    place: 'Ngarumi Soft', 
+    desc: 'Pengembangan ekosistem sistem manajemen web (ERP/POS) dan solusi industri kreatif untuk mitra lokal.' 
+  },
+  { 
+    year: '2025', 
+    role: 'Establishment', 
+    place: 'Software Studio', 
+    desc: 'Resmi beroperasi sebagai pengembang, menggarap proyek strategis seperti sistem internal perusahaan.' 
+  },
+  { 
+    year: '2025', 
+    role: 'Ideation', 
+    place: 'Project Origin', 
+    desc: 'Berawal dari visi untuk menghadirkan solusi digital yang tepat guna bagi UMKM, sektor pendidikan, dan efisiensi bisnis.' 
+  },
+];
+---
+
+<BaseLayout
+  title="Tentang — Ngarumi Soft"
+  description="Kami adalah Ngarumi Soft, studio pengembangan perangkat lunak yang berfokus pada solusi manajemen digital."
+>
+
+<main class="mx-auto w-[min(1160px,100%-2rem)] py-24">
+
+  <section class="mb-14 reveal-section">
+    <h1 class="font-display font-light text-ink leading-[0.95] tracking-[-0.025em]" style="font-size:clamp(3rem,7vw,6rem)">
+      Arsitektur sistem,<br />
+      <em class="not-italic text-gradient-gold">akselerasi</em> bisnis.
+    </h1>
+  </section>
+
+  <section class="grid lg:grid-cols-[1fr_1.05fr] gap-16 lg:gap-28 items-center mb-32 reveal-section">
+    <div>
+      <div class="space-y-6 text-ink-2 font-light leading-[1.8] text-[1.05rem] mb-12">
+        <p>
+          Ngarumi Soft adalah kolektif pengembang dan desainer yang berfokus pada pembangunan solusi digital fungsional. Kami menjembatani kebutuhan teknis yang kompleks dengan interface yang intuitif.
+        </p>
+        <p>
+          Kami telah dipercaya membangun berbagai produk, mulai dari sistem manajemen warehouse (ERP) hingga platform pengembangan akademik dengan standar performa tinggi.
+        </p>
+        
+        <div class="grid grid-cols-2 gap-8 pt-4">
+          <div class="border-l border-bg-3 pl-4">
+            <span class="block font-display text-3xl text-gold mb-1">5+</span>
+            <span class="text-[0.7rem] uppercase tracking-widest text-ink-3">Proyek Selesai</span>
+          </div>
+          <div class="border-l border-bg-3 pl-4">
+            <span class="block font-display text-3xl text-gold mb-1">98%</span>
+            <span class="text-[0.7rem] uppercase tracking-widest text-ink-3">Client Satisfaction</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-6 pt-8 border-t border-bg-2">
+        <a href="/kontak" class="inline-flex items-center gap-2 text-sm text-gold hover:text-gold-light transition-colors group">
+          Mulai Konsultasi
+          <svg class="transition-transform group-hover:translate-x-1.5" width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor">
+            <path d="M3 7h8M8 4l3 3-3 3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="relative group">
+      <div class="absolute -inset-4 bg-gold/10 rounded-[2rem] blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+      
+      <div class="relative aspect-[4/4] rounded-2xl overflow-hidden border border-bg-2 bg-bg-2">
+        <img 
+          src="Ngarumi.png" 
+          alt="Ngarumi Soft Collaborative Workshop" 
+          loading="lazy"
+          class="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal-section">
+    <div class="flex items-center gap-4 mb-14">
+      <span class="font-mono text-[0.6rem] tracking-[0.22em] uppercase text-gold">Milestone</span>
+      <span class="h-px bg-bg-3 w-20"></span>
+    </div>
+
+    <div class="relative">
+      <div class="absolute left-[5.5rem] top-0 bottom-0 w-px bg-bg-2 hidden sm:block"></div>
+      
+      <div class="space-y-0 divide-y divide-bg-2">
+        {timeline.map((t) => (
+          <div class="group relative flex flex-col sm:flex-row gap-6 sm:gap-10 py-12 hover:bg-bg-1/40 transition-all duration-500 rounded-sm px-0 hover:px-6">
+            <div class="shrink-0 w-20 text-right hidden sm:block pt-1.5">
+              <span class="font-mono text-[0.7rem] tracking-widest text-ink-3 group-hover:text-gold transition-colors">{t.year}</span>
+            </div>
+            
+            <div class="absolute left-[5.1rem] top-[3.25rem] w-[8px] h-[8px] rounded-full border border-bg-3 bg-bg group-hover:border-gold group-hover:scale-125 transition-all duration-500 hidden sm:block z-10"></div>
+            
+            <div class="flex-1 min-w-0">
+              <span class="font-mono text-[0.65rem] tracking-widest text-gold mb-2 block sm:hidden">{t.year}</span>
+              <h3 class="font-display font-light text-2xl text-ink mb-1 group-hover:text-gold transition-colors duration-500">{t.role}</h3>
+              <p class="font-mono text-[0.65rem] tracking-wider text-ink-3 mb-4 uppercase">{t.place}</p>
+              <p class="text-[0.95rem] text-ink-2 leading-relaxed max-w-2xl">{t.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</main>
+
+</BaseLayout>
+
+<style>
+  /* Base reveal state */
+  .reveal-section { 
+    opacity: 0; 
+    transform: translateY(24px); 
+    transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), transform 1.2s cubic-bezier(0.22, 1, 0.36, 1); 
+  }
+  
+  .reveal-section.in-view { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+  
+  /* Floating cards animation */
+  .reveal-card { 
+    opacity: 0; 
+    transform: translateY(12px) translateX(10px); 
+    transition: all 0.9s cubic-bezier(0.34, 1.56, 0.64, 1); 
+  }
+  
+  .in-view .reveal-card { 
+    opacity: 1; 
+    transform: translateY(0) translateX(0); 
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(to right, #d4af37, #fcf6ba, #d4af37);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+</style>
+
+<script>
+  // Gunakan satu observer untuk efisiensi
+  const observerOptions = {
+    threshold: 0.15,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { 
+      if (entry.isIntersecting) { 
+        entry.target.classList.add('in-view'); 
+        revealObserver.unobserve(entry.target); 
+      } 
+    });
+  }, observerOptions);
+  
+  document.querySelectorAll('.reveal-section').forEach(el => revealObserver.observe(el));
+</script>

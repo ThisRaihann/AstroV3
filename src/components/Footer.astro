@@ -1,0 +1,110 @@
+---
+const year = new Date().getFullYear();
+
+const navLinks = [
+  { label: 'Beranda',  href: '/' },
+  { label: 'Tentang',  href: '/tentang' },
+  { label: 'Layanan',  href: '/layanan' },
+  { label: 'Proyek',   href: '/proyek' },
+  { label: 'Blog',     href: '/blog' },
+  { label: 'Kontak',   href: '/kontak' },
+];
+
+const socials = [
+  { label: 'Tiktok',     href: 'https://tiktok.com/@ngarumisoft' },
+  { label: 'Instagram',   href: 'https://instagram.com/ngarumisoft' },
+  { label: 'WhatsApp',   href: 'https://wa.me/6282335999559' },
+  { label: 'Email',      href: 'mailto:ngarumisoft@gmail.com' },
+];
+
+const stack = ['Astro', 'Laravel', 'CodeIgniter', 'TypeScript','Filament', 'MySQL'];
+---
+
+<footer class="relative mt-32 pt-20 pb-10 border-t border-bg-2 overflow-hidden">
+
+  <!-- Ambient glow -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[600px] h-[240px] bg-gold-radial rounded-full blur-3xl opacity-60"
+  ></div>
+
+  <div class="mx-auto w-[min(1160px,100%-3rem)]">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 pb-12 border-b border-bg-2">
+
+      <!-- Brand -->
+      <div>
+        <a href="/" class="inline-flex items-center gap-2.5 mb-5 group">
+          <img src="Ngarumi.png" alt="" class="h-20 w-auto transition-transform duration-300 group-hover:scale-105" />
+        </a>
+        <p class="text-sm text-ink-2 leading-relaxed mb-4">
+          Membangun produk digital yang<br class="hidden sm:block" /> elegan &amp; berdampak.
+        </p>
+        <p class="inline-flex items-center gap-1.5 font-mono text-[0.72rem] tracking-wide text-ink-3">
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <circle cx="6" cy="5" r="2.5" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M6 1C3.79 1 2 2.79 2 5c0 3 4 7 4 7s4-4 4-7c0-2.21-1.79-4-4-4z" stroke="currentColor" stroke-width="1.2" fill="none"/>
+          </svg>
+          Indonesia · Remote Friendly
+        </p>
+      </div>
+
+      <!-- Nav -->
+      <div>
+        <p class="font-mono text-[0.65rem] tracking-[0.14em] uppercase text-ink-3 mb-4">Navigasi</p>
+        <ul class="list-none space-y-2.5" role="list">
+          {navLinks.map(l => (
+            <li>
+              <a href={l.href} class="text-sm text-ink-2 hover:text-gold transition-colors duration-200">{l.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Social -->
+      <div>
+        <p class="font-mono text-[0.65rem] tracking-[0.14em] uppercase text-ink-3 mb-4">Terhubung</p>
+        <ul class="list-none space-y-2.5" role="list">
+          {socials.map(l => (
+            <li>
+              <a
+                href={l.href}
+                class="text-sm text-ink-2 hover:text-gold transition-colors duration-200"
+                target={l.href.startsWith('http') ? '_blank' : undefined}
+                rel="noopener noreferrer"
+              >{l.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Status -->
+      <div>
+        <p class="font-mono text-[0.65rem] tracking-[0.14em] uppercase text-ink-3 mb-4">Status</p>
+        <div class="flex items-center gap-2 text-sm text-ink-2 mb-6">
+          <span class="w-[7px] h-[7px] rounded-full bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.55)] animate-shimmer shrink-0"></span>
+          Tersedia untuk proyek baru
+        </div>
+        <p class="font-mono text-[0.65rem] tracking-[0.14em] uppercase text-ink-3 mb-2.5">Stack Favorit</p>
+        <div class="flex flex-wrap gap-1.5">
+          {stack.map(t => (
+            <span class="font-mono text-[0.68rem] text-ink-3 border border-bg-3 px-2 py-0.5 rounded-full hover:text-gold hover:border-gold-border transition-colors cursor-default">
+              {t}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 pt-8">
+      <span class="font-mono text-[0.72rem] text-ink-3">
+        © {year} Ngarumi Dev. Dibuat dengan sepenuh hati.
+      </span>
+      <span class="font-mono text-[0.72rem] text-ink-3 flex gap-3">
+        <a href="/privacy" class="hover:text-gold transition-colors">Privasi</a>
+        <span aria-hidden="true">·</span>
+        <a href="/terms" class="hover:text-gold transition-colors">Ketentuan</a>
+      </span>
+    </div>
+  </div>
+</footer>

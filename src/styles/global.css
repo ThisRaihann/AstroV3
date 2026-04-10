@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Outfit:wght@300;400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-bg text-ink font-sans font-light antialiased overflow-x-hidden;
+  }
+
+  ::selection {
+    background: rgba(201, 169, 110, 0.18);
+    color: #e8cfa0;
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { @apply bg-bg; }
+  ::-webkit-scrollbar-thumb { @apply bg-bg-3 rounded-sm; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(201, 169, 110, 0.25); }
+
+  :focus-visible {
+    outline: 1px solid #c9a96e;
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  /* Noise overlay - applied via JS or pseudo to body */
+  .noise-overlay::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    @apply bg-noise opacity-[0.028] pointer-events-none z-[9999];
+  }
+
+  /* Animation delays */
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+
+  /* Gold gradient text */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, #c9a96e 0%, #e8cfa0 50%, #c9a96e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Subtle inset border on dark surfaces */
+  .inset-border {
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+  }
+}

@@ -1,0 +1,162 @@
+---
+const navLinks = [
+  { label: 'Tentang',  href: '/tentang' },
+  { label: 'Layanan',  href: '/layanan' },
+  { label: 'Proyek',   href: '/proyek' },
+  { label: 'Blog',     href: '/blog' },
+  { label: 'Kontak',   href: '/kontak' },
+];
+
+const { pathname } = Astro.url;
+---
+
+<header
+  id="nav"
+  class="fixed top-0 left-0 right-0 z-50 h-[68px] transition-all duration-300 ease-out-expo"
+>
+  <nav class="mx-auto w-[min(1230px,100%-3rem)] h-full flex items-center gap-8">
+
+    <a href="/" class="flex items-center shrink-0 group" aria-label="Ngarumi Dev">
+  <div class="w-32 sm:w-40 shrink-0"> 
+    <img 
+      src="/Ngarumi.png" 
+      alt="Ngarumi Logo" 
+      class="w-full h-auto block transition-transform duration-300 group-hover:scale-105"
+    />
+  </div>
+</a>
+
+    <!-- Desktop nav links -->
+    <ul class="hidden md:flex items-center gap-1 ml-auto list-none" role="list">
+      {navLinks.map(link => (
+        <li>
+          <a
+            href={link.href}
+            class:list={[
+              'relative px-3 py-1.5 text-[0.8rem] tracking-wider rounded transition-colors duration-200',
+              'after:absolute after:bottom-0.5 after:h-px after:bg-gold after:transition-all after:duration-300 after:ease-out-expo',
+              pathname === link.href
+                ? 'text-ink after:left-3 after:right-3'
+                : 'text-ink-2 hover:text-ink after:left-1/2 after:right-1/2 hover:after:left-3 hover:after:right-3',
+            ]}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- CTA -->
+    <a
+      href="/kontak"
+      class="
+        hidden md:inline-flex items-center gap-1.5 shrink-0
+        text-[0.76rem] tracking-widest text-gold
+        border border-gold-border bg-gold-dim
+        px-4 py-2 rounded
+        transition-all duration-200 hover:-translate-y-px
+        hover:bg-[rgba(201,169,110,0.22)] hover:border-[rgba(201,169,110,0.45)]
+      "
+    >
+      Hubungi Saya
+      <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+        <path d="M2 10L10 2M10 2H4M10 2V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+
+    <!-- Hamburger -->
+    <button
+      id="burger"
+      aria-label="Buka menu"
+      aria-expanded="false"
+      class="md:hidden ml-auto flex flex-col gap-[5px] p-2 bg-transparent border-0 cursor-pointer"
+    >
+      <span id="b1" class="block w-[22px] h-px bg-ink-2 transition-all duration-300 ease-out-expo origin-center"></span>
+      <span id="b2" class="block w-[22px] h-px bg-ink-2 transition-all duration-300 ease-out-expo origin-center"></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div
+    id="drawer"
+    aria-hidden="true"
+    class="
+      absolute top-[68px] left-0 right-0
+      bg-bg/95 backdrop-blur-xl
+      border-b border-bg-2
+      px-6 py-5
+      translate-y-[-6px] opacity-0 pointer-events-none
+      transition-all duration-300 ease-out-expo
+    "
+  >
+    <ul class="list-none flex flex-col gap-1" role="list">
+      {navLinks.map(link => (
+        <li>
+          <a
+            href={link.href}
+            class="block text-sm text-ink-2 py-2.5 border-b border-bg-2 hover:text-ink hover:pl-4 transition-all duration-200"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+      <li>
+        <a
+          href="/kontak"
+          class="
+            mt-3 flex justify-center items-center gap-2
+            text-sm text-gold border border-gold-border bg-gold-dim
+            px-4 py-3 rounded w-full
+          "
+        >
+          Hubungi Saya →
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  const nav    = document.getElementById('nav')!;
+  const burger = document.getElementById('burger')!;
+  const drawer = document.getElementById('drawer')!;
+  const b1     = document.getElementById('b1')!;
+  const b2     = document.getElementById('b2')!;
+
+  // Scroll: add frosted glass background
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY > 20;
+    nav.classList.toggle('bg-bg/80',   scrolled);
+    nav.classList.toggle('backdrop-blur-xl', scrolled);
+    nav.classList.toggle('border-b',   scrolled);
+    nav.classList.toggle('border-bg-2', scrolled);
+  }, { passive: true });
+
+  // Toggle mobile menu
+  burger.addEventListener('click', () => {
+    const open = burger.getAttribute('aria-expanded') === 'true';
+    burger.setAttribute('aria-expanded', String(!open));
+    drawer.setAttribute('aria-hidden', String(open));
+
+    if (!open) {
+      drawer.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-1.5');
+      drawer.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+      b1.style.transform = 'translateY(6px) rotate(45deg)';
+      b1.style.background = '#c9a96e';
+      b2.style.transform = 'translateY(-6px) rotate(-45deg)';
+      b2.style.background = '#c9a96e';
+    } else {
+      drawer.classList.add('opacity-0', 'pointer-events-none', '-translate-y-1.5');
+      drawer.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+      b1.style.transform = '';
+      b1.style.background = '';
+      b2.style.transform = '';
+      b2.style.background = '';
+    }
+  });
+
+  // Close on link click
+  drawer.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => burger.click())
+  );
+</script>
