@@ -3,8 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "astro:content": [".astro/types.d.ts"]
+      "@/*": ["src/*"]
     },
     "jsx": "preserve",
     "jsxImportSource": "astro",
