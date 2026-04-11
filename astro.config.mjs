@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   // PASTIKAN site ada dan protokolnya lengkap (https://)
-  site: 'https://ngarumi.dev',
+  site: 'https://indonesia.ngarumi.dev',
   // Tambahkan trailingSlash agar sitemap nggak bingung ngitung path
   trailingSlash: 'ignore',
   integrations: [
