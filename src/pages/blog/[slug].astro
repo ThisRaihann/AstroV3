@@ -1,11 +1,12 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import BlogLayout from '../../layouts/BlogLayout.astro';
 import type { CollectionEntry } from 'astro:content';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map((post: CollectionEntry<'blog'>) => ({ // Tambahkan tipe di sini
+  return posts.map((post) => ({
+    // Di Astro v6 dengan loader glob, post.id adalah slug-nya
     params: { slug: post.id }, 
     props: { post },
   }));
@@ -14,12 +15,15 @@ export async function getStaticPaths() {
 interface Props {
   post: CollectionEntry<'blog'>;
 }
+
 const { post } = Astro.props;
 
-// Paksa tipe data ke any sebentar supaya bisa render tanpa merah
-const { Content } = await (post as any).render();
+/** * FIX UTAMA: Di Astro v6, gunakan fungsi render(post) 
+ * Ini yang bikin build kamu tadi error "post.render is not a function"
+ */
+const { Content } = (await render(post)) as { Content: any };
 
-// Logic Reading Time
+// Logic Reading Time (Aman)
 const wordCount = post.body ? post.body.split(/\s+/).length : 0;
 const calculatedReadingTime = Math.max(1, Math.ceil(wordCount / 200));
 
@@ -27,14 +31,16 @@ const calculatedReadingTime = Math.max(1, Math.ceil(wordCount / 200));
 const blogProps = {
   title: post.data.title,
   description: post.data.description,
-  // Pastikan pubDate dikonversi ke string agar aman dikirim ke Layout
+  // Kirim sebagai Date agar sesuai dengan BlogLayout
   pubDate: new Date(post.data.pubDate),
-  // Proteksi jika image undefined atau null
-  image: post.data.image?.url ?? '/og-default.jpg',
+  // Fallback jika image kosong
+  image: post.data.image?.url ?? '/og_default.webp',
   readingTime: post.data.readingTime ?? calculatedReadingTime
 };
 ---
 
 <BlogLayout {...blogProps}>
-  <Content />
+  <article class="prose prose-invert prose-gold max-w-none">
+    <Content />
+  </article>
 </BlogLayout>
